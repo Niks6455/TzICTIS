@@ -1,5 +1,12 @@
 <?php
+
+require_once __DIR__ . './../../../vendor/autoload.php';
+$settings = require_once __DIR__ . './settings.php';
+require_once __DIR__ . './function.php';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    
     $db = new mysqli("localhost", "root", "", "ICTISBD");
 
     if ($db->connect_error) {
@@ -9,7 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Обработка данных заявки
     $start_date = $_POST["start-date"];
     $end_date = $_POST["end-date"];
-    $file = $_FILES["file"]["name"];
+    $file = $_FILES['file']['tmp_name']; // Получение временного пути к файлу
+    $filename = $_FILES['file']['name']; // Получение имени файла
     $number_of_people = $_POST["number-of-people"];
     $message = "Начало командировки: " . $start_date . "\n";//сообщение для почты
     $message .= "Конец командировки: " . $end_date . "\n";//сообщение для почты
@@ -19,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $insert_query = "INSERT INTO заявки (начало_командировки, конец_командировки, файл, количество_человек)
                      VALUES ('$start_date', '$end_date', '$file', $number_of_people)";
     
-    if ($db->query($insert_query) === TRUE) {
+    if ($db->query($insert_query) == TRUE) {
         $last_insert_id = $db->insert_id; // Получаем ID последней вставленной записи
 
         // Обработка данных о человеках
@@ -45,19 +53,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Отправка данных на почту
-        $to = "moodbok@gmail.com";
-        $subject = "Заявка на командировку";
-      
+    $body = "$message";
+        send_mail($settings['mail_settings_prod'], '7929189niks64@gmail.com', 'заявка на командировку', $body, $file, $filename );
 
-        $headers = "From: 7929189niks64@gmail.com" . "\r\n" .
-            "Reply-To: 7929189niks64@gmail.com";
-          
-        error_log($message, 3, "log.txt");
-        if (mail($to, $subject, $message, $headers)) {
-            echo "Данные успешно отправлены на почту!";
-        } else {
-            echo "Ошибка при отправке данных на почту.";
-        }
+
 
         header("Location: ../../pages/confirm.html");
         exit;
