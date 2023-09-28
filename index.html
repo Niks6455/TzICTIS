@@ -44,7 +44,7 @@
 
       <div>
         <label for="file">Прикрепляемый doc/pdf-файл:</label>
-        <input type="file" id="file" name="file" accept=".doc, .docx, .pdf" >
+        <input type="file" id="file" name="file" accept=".doc, .docx, .pdf" required>
       </div>
 
       <div>
@@ -61,7 +61,7 @@
     
       </div>
       
-      <div class="form__but__submit">
+      <div class="form__but__submit" id="form__but">
         <input type="submit" value="Отправить">
       </div>
      
@@ -72,4 +72,5 @@
   </footer>
 </body>
 <script src="./assets/scripts/js/index.js"></script>
+<script src="./assets/scripts/js/valid.js"></script>
 </html>

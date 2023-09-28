@@ -7,7 +7,7 @@ require_once __DIR__ . './function.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     
-    $db = new mysqli("localhost", "root", "", "ICTISBD");
+    $db = new mysqli("localhost", "root", "", "ICTISBD2");
 
     if ($db->connect_error) {
         die("Ошибка подключения к базе данных: " . $db->connect_error);
@@ -15,20 +15,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Обработка данных заявки
     $start_date = $_POST["start-date"];
-    $end_date = $_POST["end-date"];
-    $file = $_FILES['file']['tmp_name']; // Получение временного пути к файлу
-    $filename = $_FILES['file']['name']; // Получение имени файла
+    $end_date = $_POST["end-date"]; 
+    $file = $_FILES['file']['tmp_name']; 
+    $filename = $_FILES['file']['name']; 
+    $filename_only = basename($filename);
     $number_of_people = $_POST["number-of-people"];
-    $message = "Начало командировки: " . $start_date . "\n";//сообщение для почты
-    $message .= "Конец командировки: " . $end_date . "\n";//сообщение для почты
-    $message .= "Количество людей: " . $number_of_people . "\n";//сообщение для почты
+    $message = "Начало командировки: " . $start_date . "\n";
+    $message .= "Конец командировки: " . $end_date . "\n";
+    $message .= "Количество людей: " . $number_of_people . "\n";
 
-    // Вставляем данные заявки в таблицу заявок
+
+    // Перемещение загруженного файла в нужную директорию
+    //$target_dir = "uploads/"; 
+    //$target_file = $target_dir . basename($filename);
+    //move_uploaded_file($file, $target_file);
+
+
     $insert_query = "INSERT INTO заявки (начало_командировки, конец_командировки, файл, количество_человек)
-                     VALUES ('$start_date', '$end_date', '$file', $number_of_people)";
+                     VALUES ('$start_date', '$end_date', '$filename_only', $number_of_people)";
     
     if ($db->query($insert_query) == TRUE) {
-        $last_insert_id = $db->insert_id; // Получаем ID последней вставленной записи
+        $last_insert_id = $db->insert_id; 
 
         // Обработка данных о человеках
         for ($i = 0; $i < $number_of_people; $i++) {
@@ -38,14 +45,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $email = $_POST["email-$i"];
             $phone = $_POST["phone-$i"];
 
-            $message .= "\nДанные о человеке " . ($i + 1) . ":\n";//сообщение для почты
-            $message .= "Имя: " . $name . "\n";//сообщение для почты
-            $message .= "Должность: " . $position . "\n";//сообщение для почты
-            $message .= "Кафедра: " . $department . "\n";//сообщение для почты
-            $message .= "Email: " . $email . "\n";//сообщение для почты
-            $message .= "Номер телефона: " . $phone . "\n";//сообщение для почты
+            $message .= "\nДанные о человеке " . ($i + 1) . ":\n";
+            $message .= "Имя: " . $name . "\n";
+            $message .= "Должность: " . $position . "\n";
+            $message .= "Кафедра: " . $department . "\n";
+            $message .= "Email: " . $email . "\n";
+            $message .= "Номер телефона: " . $phone . "\n";
 
-            // Вставляем данные о человеке в таблицу людей, связанную с заявкой
             $insert_person_query = "INSERT INTO люди (заявка_id, ФИО, должность, кафедра, email, номер_телефона)
                                     VALUES ($last_insert_id, '$name', '$position', '$department', '$email', '$phone')";
             
@@ -53,10 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Отправка данных на почту
-    $body = "$message";
+        $body = "$message";
         send_mail($settings['mail_settings_prod'], '7929189niks64@gmail.com', 'заявка на командировку', $body, $file, $filename );
-
-
 
         header("Location: ../../pages/confirm.html");
         exit;
