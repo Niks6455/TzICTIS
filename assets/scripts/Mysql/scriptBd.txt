@@ -1,0 +1,30 @@
+Ниже я оставлю скрипт с помощью которого можно создать таблицы для теста 
+
+1. Создать БД с любым названием
+2. Ввести скрипты ниже для создания таблиц
+//--------------------
+Скрипт для создания таблицы заявки:
+CREATE TABLE заявки (
+id INT AUTO_INCREMENT PRIMARY KEY,
+начало_командировки DATE NOT NULL,
+конец_командировки DATE NOT NULL,
+файл VARCHAR(255),
+количество_человек INT NOT NULL
+);
+
+
+Скрипт для создания таблицы люди:
+CREATE TABLE люди (
+id INT AUTO_INCREMENT PRIMARY KEY,
+заявка_id INT,
+ФИО VARCHAR(255) NOT NULL,
+должность VARCHAR(255) NOT NULL,
+кафедра VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL,
+номер_телефона VARCHAR(20) NOT NULL,
+FOREIGN KEY (заявка_id) REFERENCES заявки(id)
+);
+//-----------------------
+3. Изменить данные для своей БД в файле Index.php 8строка
+
+Можно тестить!
