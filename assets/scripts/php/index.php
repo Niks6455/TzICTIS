@@ -1,14 +1,11 @@
 <?php
-
 require_once __DIR__ . './../../../vendor/autoload.php';
 $settings = require_once __DIR__ . './settings.php';
 require_once __DIR__ . './function.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    
     $db = new mysqli("localhost", "root", "", "ICTISBD2");
-
     if ($db->connect_error) {
         die("Ошибка подключения к базе данных: " . $db->connect_error);
     }

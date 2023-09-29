@@ -1,0 +1,343 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+:root {
+  --button-color:#87ae1d;
+  --buttonHover-color:#6b9008;
+  --background-color:#1966a8;
+  --Text-color:#fff;
+}
+
+body {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  font-family: 'Roboto', sans-serif;
+  
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1230px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+/*header */
+header{
+  background: linear-gradient(90deg, #87ae1d 0%, #1966a8 64.58%, #262878 100%);
+  height: 170px;
+  width: 100%;
+}
+.header__inner{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header__logo{
+  width: 30%;
+}
+.header__logo img{
+  height: 130px;
+  margin-top: 20px;
+}
+.header__menu{
+  display: flex;
+  margin-top: 40px;
+  width: 70%;
+}
+
+.header__search{
+  display: flex;
+  width: 100%;
+}
+.header__search img{
+margin-right: 0px;
+width: 35px;
+height: 35px;
+margin-right: 5px;
+position: relative;
+top: 5px;
+}
+.header__search input{
+  width: 500px;
+  height: 50px;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+}
+.header__search input::placeholder{
+  color: #fff;
+  font-size: 18px;
+}
+.header__search input:focus{
+ outline: none;
+
+}
+.header__line{
+  height: 1px;
+  width: 700px;
+  background-color: #fff;
+  position: absolute;
+  left: 30%;
+  top: 90px;
+}
+.header__bar{
+  display: flex;
+  position: relative;
+  right: 100px;
+}
+.header__bar a{
+  width: 50px;
+  height: 50px;
+  margin-right: 25px;
+  transition: all 0.2s;
+}
+.header__bar a:hover{
+  opacity: 0.4;
+}
+.header__bar img{
+  width: 55px;
+  height: 55px;
+}
+/* form */
+.form__title{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 15px 0;
+}
+.form{
+  background-color: var(--background-color);
+  border-radius: 15px;
+  width: 100%;
+  padding: 10px 50px 15px 50px;
+  color: var(--Text-color);
+  font-size: 18px;
+  margin-bottom: 125px;
+}
+/* date */
+.form__file{
+ display: flex;
+ justify-content: center;
+ width: 100%;
+}
+.form__tripDate{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.form__tripDate__inner{
+  margin-right: 25px;
+ text-align: center;
+}
+#start-date, #end-date{
+  position: relative;
+  top: -20px;
+  width: 300px;
+  height: 45px;
+  border: none;
+  border-radius: 5px;
+  padding: 0 10px 0 10px;
+}
+/* file */
+.input-file {
+	position: relative;
+	display: inline-block;
+}
+.input-file-btn {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	font-size: 14px;
+	vertical-align: middle;
+	color: rgb(255 255 255);
+	text-align: center;
+	border-radius: 4px;
+	background-color: var(--button-color);
+	line-height: 22px;
+	height: 40px;
+	padding: 10px 20px;
+	box-sizing: border-box;
+	border: none;
+	margin: 0;
+	transition: background-color 0.2s;
+}
+.input-file-text {
+	padding: 0 10px;
+	line-height: 40px;
+	display: inline-block;
+}
+.input-file input[type=file] {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+	display: block;
+	width: 0;
+	height: 0;
+}
+.input-file input[type=file]:focus + .input-file-btn {
+	box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+.input-file:hover .input-file-btn {
+	background-color: var(--buttonHover-color);
+}
+.input-file:active .input-file-btn {
+	background-color: #2E703A;
+}
+.input-file input[type=file]:disabled + .input-file-btn {
+	background-color: #eee;
+}
+/* number-of-people */
+.form__people__num{
+  margin-top: 15px;
+  display: flex;
+ justify-content: center;
+ width: 100%;
+}
+.form__people__num label{
+  margin-right: 15px;
+}
+input[type="number"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* confurm__buton */
+.form__confurm__but{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  top: 35px;
+}
+.form__confurm__but button{
+  width: 200px;
+  height: 35px;
+  background-color: var(--button-color);
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 16px;
+  transition: 0.2s linear all;
+}
+.form__confurm__but button:hover{
+  background-color: var(--buttonHover-color);
+}
+
+/* person */
+#form__person {
+  width: 100%;
+  max-height: 260px;
+  height: auto;
+  padding: 25px;
+  margin-top: 25px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  color: #000000;
+  overflow-y: auto;
+ 
+}
+#form__person::-webkit-scrollbar {
+  height: 10px; 
+  width: 5px;
+}
+#form__person::-webkit-scrollbar-thumb { 
+  background: var(--button-color);
+  border-radius: 5px;
+}
+#form__person::-webkit-scrollbar-track { 
+  background: #333;
+  border-radius: 5px;
+} 
+#form__person{
+ background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Button__Submit */
+.form__but__inner{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 20px 0 15px 0;
+}
+#form__but input{
+  height:  45px;
+  width:  250px;
+  background-color: var(--button-color);
+  border-radius: 15px;
+  border: none;
+  color: #ffffff;
+  font-size: 18px;
+  transition: 0.2s linear all;
+}
+#form__but input:hover{
+  cursor: pointer;
+  background-color: var(--buttonHover-color);
+}
+
+/* footer */
+footer{
+  background: linear-gradient(90deg, #87ae1d 0%, #1966a8 64.58%, #262878 100%);
+  height:125px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+.footer__inner{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 50px;
+}
+.footer__text{
+  margin-top: 10px;
+  font-size: 18px;
+  line-height: 0.3;
+  color: #fff;
+ 
+}
+.footer__text a{
+   transition: 0.2s linear all;
+   color: #fff;
+   text-decoration: none;
+}
+.footer__text a:hover{
+cursor: pointer;
+  opacity: 0.5;
+}
+.footer__text__center{
+  padding-top: 10px;
+}
+.footer__icon{
+  display: flex;
+  margin-top: 35px;
+}
+.footer__icon img{
+  width: 55px;
+  height: 55px;
+}
+.footer__icon a{
+  transition: 0.2s linear all;
+}
+.footer__icon a:hover{
+  opacity: 0.5;
+}
+.footer__icon img:last-child{
+  margin-left: 15px;
+}
