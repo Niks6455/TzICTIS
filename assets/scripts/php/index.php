@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Отправка данных на почту
         $body = "$message";
-        send_mail($settings['mail_settings_prod'], '7929189niks64@gmail.com', 'заявка на командировку', $body, $file, $filename );
+        send_mail($settings['mail_settings_prod'], 'alis@sfedu.ru', 'заявка на командировку', $body, $file, $filename );
 
         header("Location: ../../pages/confirm.html");
         exit;
